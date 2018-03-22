@@ -16,4 +16,5 @@ fun ImageView.loadImage(photoUrl: String, centerCropped: Boolean = false) {
 }
 
 // RecyclerView ext
-fun <T : View> RecyclerView.ViewHolder.bindView(viewId: Int) = lazy { itemView.findViewById<T>(viewId) }
+fun <T : View> RecyclerView.ViewHolder.bindView(viewId: Int)
+        = lazy { itemView.findViewById<T>(viewId) }

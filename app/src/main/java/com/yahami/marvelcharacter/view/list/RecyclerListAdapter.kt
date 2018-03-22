@@ -12,6 +12,8 @@ open class RecyclerListAdapter(var items: List<AnyItemAdapter> = listOf())
         return items.first { it.layoutId == layoutId }.onCreateViewHolder(itemView)
     }
 
+    //override fun getItemViewType(position: Int) = items[position].layoutId
+
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

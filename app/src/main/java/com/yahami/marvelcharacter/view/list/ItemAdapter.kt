@@ -1,5 +1,6 @@
 package com.yahami.marvelcharacter.view.list
 
+import android.support.annotation.LayoutRes
 import android.support.v7.widget.RecyclerView
 import android.view.View
 
@@ -11,7 +12,7 @@ import android.view.View
  * The same with the list adapter - we need only one in this example, but in most projects there is more than a single list,
  * and it is better to extract common behavior into a single abstract class.
  */
-abstract class ItemAdapter<T : RecyclerView.ViewHolder>(val layoutId: Int) {
+abstract class ItemAdapter<T : RecyclerView.ViewHolder>(@LayoutRes open val layoutId: Int) {
 
     abstract fun onCreateViewHolder(itemView: View): T
 
