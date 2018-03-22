@@ -11,10 +11,13 @@ android {
     defaultConfig {
         applicationId "com.yahami.marvelcharacter"
         minSdkVersion 21
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "PUBLIC_KEY", "\"${marvelPublicKey}\"")
+        buildConfigField("String", "PRIVATE_KEY", "\"${marvelPrivateKey}\"")
     }
     buildTypes {
         release {
@@ -27,18 +30,36 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    // Kotlin
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
+    // Support
     implementation "com.android.support:design:$android_support_version"
     implementation "com.android.support:support-v4:$android_support_version"
     implementation "com.android.support:appcompat-v7:$android_support_version"
     implementation "com.android.support:recyclerview-v7:$android_support_version"
 
+    // Layout
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 
+    // Glide
     implementation "com.github.bumptech.glide:glide:$glide_version"
 
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    // RxJava
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
+
+    // RxAndroid
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
+
+    // Retrofit
+    implementation(["com.squareup.retrofit2:retrofit:$retrofit_version",
+                    "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version",
+                    "com.squareup.retrofit2:converter-gson:$retrofit_version",
+                    "com.squareup.okhttp3:okhttp:$okhttp_version",
+                    "com.squareup.okhttp3:logging-interceptor:$okhttp_version"])
+
 }
