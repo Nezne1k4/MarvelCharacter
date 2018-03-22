@@ -9,7 +9,7 @@ import retrofit2.http.Query
 /**
  * Created by Nezneika on 3/22/18.
  */
-interface MarvelApi {
+interface ApiService {
     @GET("characters")
     fun getCharacters(
             @Query("offset") offset: Int?,
