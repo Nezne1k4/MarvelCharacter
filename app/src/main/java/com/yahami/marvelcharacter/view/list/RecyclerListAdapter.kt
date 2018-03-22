@@ -12,7 +12,8 @@ open class RecyclerListAdapter(var items: List<AnyItemAdapter> = listOf())
         return items.first { it.layoutId == layoutId }.onCreateViewHolder(itemView)
     }
 
-    //override fun getItemViewType(position: Int) = items[position].layoutId
+    // getItemViewType() must be override else error 'Resources$NotFoundException'
+    override fun getItemViewType(position: Int) = items[position].layoutId
 
     override fun getItemCount(): Int = items.size
 
