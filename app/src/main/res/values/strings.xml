@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">MarvelCharacter</string>
+    <string name="app_name">Marvel Kotlin</string>
+    <string name="marvel_copyright_notice">Data provided by Marvel. © 2018 MARVEL</string>
 </resources>
