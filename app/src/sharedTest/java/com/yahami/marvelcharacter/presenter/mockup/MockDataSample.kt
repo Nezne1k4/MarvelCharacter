@@ -7,7 +7,7 @@ object MockDataSample {
 
     val sampleCharacterList = listOf(
             sampleCharacter,
-            MarvelCharacter("Name1", "ImageUrl1"),
-            MarvelCharacter("Name2", "ImageUrl2")
+            MarvelCharacter("Captain Winter", "http://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg"),
+            MarvelCharacter("Iron man X", "http://i.annihil.us/u/prod/marvel/i/mg/9/50/4ce18691cbf04.jpg")
     )
 }
