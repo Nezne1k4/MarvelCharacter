@@ -40,28 +40,10 @@ class MainPresenterTest {
                     mockShowError = { fail() }
             )
 
-//            val view = object : MainView {
-//                override var refresh: Boolean = false
-//
-//                override fun show(items: List<MarvelCharacter>) {
-//                    displayedList = items // target succeed
-//                }
-//
-//                override fun showError(error: Throwable) {
-//                    fail() // assume it fails if show error
-//                }
-//            }
-
             // mocking repository
             val exampleCharacterList = MockDataSample.sampleCharacterList
             val mockRepository = MockMarvelRepository { Single.just(exampleCharacterList) }
             //val mockRepository = MockMarvelRepository { throw Throwable("404 Not found error") }
-
-
-//            val marvelRepository = object : MarvelRepository {
-//                override fun getAllCharacters(): Single<List<MarvelCharacter>>
-//                        = Single.just(exampleCharacterList)
-//            }
 
             // mocking Presenter
             val mainPresenter = MainPresenter(mockView, mockRepository)
