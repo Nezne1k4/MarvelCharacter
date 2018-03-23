@@ -1,6 +1,7 @@
 package com.yahami.marvelcharacter.presenter
 
 import com.yahami.marvelcharacter.data.remote.repository.MarvelRepository
+import com.yahami.marvelcharacter.utils.applySchedulers
 import com.yahami.marvelcharacter.view.main.MainView
 
 class MainPresenter(val view: MainView, val repository: MarvelRepository) {
@@ -15,6 +16,9 @@ class MainPresenter(val view: MainView, val repository: MarvelRepository) {
 
     private fun loadAllCharacters() {
         repository.getAllCharacters()
+                //.subscribeOn(Schedulers.io())
+                //.observeOn(AndroidSchedulers.mainThread())
+                .applySchedulers()
                 .subscribe(
                         { items -> view.show(items) }, // what is a Consumer ?
                         { error -> view.showError(error) }

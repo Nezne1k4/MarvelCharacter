@@ -5,15 +5,28 @@ import com.yahami.marvelcharacter.presenter.mockup.MockDataSample
 import com.yahami.marvelcharacter.presenter.mockup.MockMainView
 import com.yahami.marvelcharacter.presenter.mockup.MockMarvelRepository
 import io.reactivex.Single
+import io.reactivex.android.plugins.RxAndroidPlugins
+import io.reactivex.plugins.RxJavaPlugins
+import io.reactivex.schedulers.Schedulers
 import org.junit.Test
 
 import org.junit.Assert.*
+import org.junit.Before
 
 /**
  * IllegalIdentifier allow description replace function name
  */
 @Suppress("IllegalIdentifier")
 class MainPresenterTest {
+
+    @Before
+    fun setUp() {
+        // init Rx environment for testing
+        RxAndroidPlugins.setInitMainThreadSchedulerHandler { Schedulers.trampoline() }
+        RxJavaPlugins.setIoSchedulerHandler { Schedulers.trampoline() }
+        RxJavaPlugins.setComputationSchedulerHandler { Schedulers.trampoline() }
+        RxJavaPlugins.setNewThreadSchedulerHandler { Schedulers.trampoline() }
+    }
 
     @Test
     fun `After view was created, list of characters is loaded and displayed`() {
