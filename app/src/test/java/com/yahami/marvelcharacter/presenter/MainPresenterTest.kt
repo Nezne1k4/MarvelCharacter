@@ -90,4 +90,33 @@ class MainPresenterTest {
         assertEquals(someError, errorDisplayed)
     }
 
+    @Test
+    fun `When presenter is waiting for response, refresh is displayed`() {
+        // given
+        val view = MockMainView(refresh = false) // default refresh = false
+
+        val repository = MockMarvelRepository {
+            Single.fromCallable {
+                // then
+                // check when api is running
+                assertTrue(view.refresh)
+                MockDataSample.sampleCharacterList
+            }
+        }
+
+        view.mockShow = {
+            // then
+            // check when api returns data to view
+            _ -> assertTrue(view.refresh)
+        }
+        val mainPresenter = MainPresenter(view, repository)
+
+        // when
+        mainPresenter.onViewCreated()
+
+        // then
+        // check when all data shown
+        assertFalse(view.refresh)
+    }
+
 }

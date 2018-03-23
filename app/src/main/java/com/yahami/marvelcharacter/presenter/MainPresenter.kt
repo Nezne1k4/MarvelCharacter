@@ -20,6 +20,8 @@ class MainPresenter(val view: MainView, val repository: MarvelRepository) : Base
         // subscriptions is in scope of BasePresenterImp
         subscriptions += repository.getAllCharacters()
                 .applySchedulers()
+                .doOnSubscribe { view.refresh = true }
+                .doFinally { view.refresh = false }
                 .subscribe(
                         { view.show(it) }, // what is a Consumer ?
                         { view.showError(it) }

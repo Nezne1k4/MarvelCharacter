@@ -5,7 +5,7 @@ import com.yahami.marvelcharacter.view.main.MainView
 
 class MockMainView(
         override var refresh: Boolean = false,
-        val mockShow: (items: List<MarvelCharacter>) -> Unit = {},
+        var mockShow: (items: List<MarvelCharacter>) -> Unit = {},
         val mockShowError: (error: Throwable) -> Unit = {}
 ) : MainView {
 
