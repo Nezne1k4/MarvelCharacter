@@ -21,8 +21,8 @@ class MainPresenter(val view: MainView, val repository: MarvelRepository) : Base
         subscriptions += repository.getAllCharacters()
                 .applySchedulers()
                 .subscribe(
-                        { items -> view.show(items) }, // what is a Consumer ?
-                        { error -> view.showError(error) }
+                        { view.show(it) }, // what is a Consumer ?
+                        { view.showError(it) }
                 )
     }
 }

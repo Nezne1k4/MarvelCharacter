@@ -4,17 +4,14 @@ import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import com.yahami.marvelcharacter.R
 import com.yahami.marvelcharacter.data.remote.repository.MarvelRepository
-import com.yahami.marvelcharacter.data.remote.repository.MarvelRepositoryImpl
 import com.yahami.marvelcharacter.model.MarvelCharacter
-import com.yahami.marvelcharacter.presenter.BasePresenterImp
 import com.yahami.marvelcharacter.presenter.MainPresenter
 import com.yahami.marvelcharacter.view.common.BaseActivityWithPresenter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivityWithPresenter(), MainView {
 
-    override val presenter: BasePresenterImp
-            by lazy { MainPresenter(this, MarvelRepository.provides()) }
+    override val presenter by lazy { MainPresenter(this, MarvelRepository.provides()) }
 
     private val characters = listOf(
             MarvelCharacter("Captain Winter", "http://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg"),

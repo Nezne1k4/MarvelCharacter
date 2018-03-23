@@ -69,4 +69,25 @@ class MainPresenterTest {
         }
     }
 
+    @Test
+    fun `When API returns error, it is displayed on view`() {
+        // given
+        val someError = Error("API result error")
+        var errorDisplayed: Throwable? = null
+
+        val repository = MockMarvelRepository { Single.error(someError) }
+
+        val view = MockMainView(
+                mockShow = { _ -> fail() },
+                mockShowError = { errorDisplayed = it }
+        )
+
+        // when
+        val mainPresenter = MainPresenter(view, repository)
+        mainPresenter.onViewCreated()
+
+        // then
+        assertEquals(someError, errorDisplayed)
+    }
+
 }
