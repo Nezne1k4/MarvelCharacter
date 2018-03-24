@@ -12,6 +12,7 @@ import retrofit2.http.Query
 interface ApiService {
     @GET("characters")
     fun getCharacters(
+            @Query("nameStartsWith") searchText: String?,
             @Query("offset") offset: Int?,
             @Query("limit") limit: Int?
     ): Single<DataWrapper<List<CharacterMarvelDto>>>

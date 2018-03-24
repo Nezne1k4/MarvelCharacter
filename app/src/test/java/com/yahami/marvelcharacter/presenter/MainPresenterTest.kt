@@ -70,7 +70,7 @@ class MainPresenterTest {
     }
 
     @Test
-    fun `When API returns error, it is displayed on view`() {
+    fun `When API returns error, it is displayed error on view`() {
         // given
         val someError = Error("API result error")
         var errorDisplayed: Throwable? = null

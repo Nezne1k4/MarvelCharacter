@@ -5,7 +5,7 @@ import com.yahami.marvelcharacter.utils.applySchedulers
 import com.yahami.marvelcharacter.utils.plusAssign
 import com.yahami.marvelcharacter.view.main.MainView
 
-class MainPresenter(val view: MainView, val repository: MarvelRepository) : BasePresenterImp() {
+class MainPresenter(val view: MainView, private val repository: MarvelRepository) : BasePresenterImp() {
 
     fun onViewCreated() {
         loadAllCharacters()
@@ -15,10 +15,14 @@ class MainPresenter(val view: MainView, val repository: MarvelRepository) : Base
         loadAllCharacters()
     }
 
-    private fun loadAllCharacters() {
+    fun onSearchChanged(text: String) {
+        loadAllCharacters(text)
+    }
+
+    private fun loadAllCharacters(searchText: String? = null) {
         // subscriptions for better control memory leak
         // subscriptions is in scope of BasePresenterImp
-        subscriptions += repository.getAllCharacters()
+        subscriptions += repository.getAllCharacters(searchText)
                 .applySchedulers()
                 .doOnSubscribe { view.refresh = true }
                 .doFinally { view.refresh = false }

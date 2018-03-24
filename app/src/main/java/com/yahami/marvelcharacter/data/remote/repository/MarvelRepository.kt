@@ -10,7 +10,7 @@ import io.reactivex.Single
  * instead of the whole API definition.
  */
 interface MarvelRepository {
-    fun getAllCharacters(): Single<List<MarvelCharacter>>
+    fun getAllCharacters(searchText: String? = null): Single<List<MarvelCharacter>>
 
     companion object : Provider<MarvelRepository>() {
         override fun provides(): MarvelRepository {

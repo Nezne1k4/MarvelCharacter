@@ -9,9 +9,12 @@ class MarvelRepositoryImpl : MarvelRepository {
 
     val api = retrofit.create(ApiService::class.java)
 
-    // converter layer to convert DTO to Marvel POJO
-    override fun getAllCharacters(): Single<List<MarvelCharacter>> =
-            api.getCharacters(offset = 0, limit = elementsOnListLimit)
+    // converter layer to convert DTO to POJO MarvelCharacter
+    override fun getAllCharacters(searchText: String?): Single<List<MarvelCharacter>> =
+            api.getCharacters(
+                    searchText = searchText,
+                    offset = 0,
+                    limit = elementsOnListLimit)
                     .map {
                         it.data?.results.orEmpty().map(::MarvelCharacter)
                     }
