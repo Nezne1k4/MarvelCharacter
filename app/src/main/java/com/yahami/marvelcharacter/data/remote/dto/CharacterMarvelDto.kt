@@ -9,4 +9,10 @@ class CharacterMarvelDto {
 
     val imageUrl: String
         get() = thumbnail.completeImagePath
+
+    lateinit var description: String
+    var comics: ListWrapper<ComicDto> = ListWrapper()
+    var series: ListWrapper<ComicDto> = ListWrapper()
+    var stories: ListWrapper<ComicDto> = ListWrapper()
+    var events: ListWrapper<ComicDto> = ListWrapper()
 }
