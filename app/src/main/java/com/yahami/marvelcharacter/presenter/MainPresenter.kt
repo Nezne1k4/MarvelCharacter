@@ -20,9 +20,10 @@ class MainPresenter(val view: MainView, private val repository: MarvelRepository
     }
 
     private fun loadAllCharacters(searchText: String? = null) {
+        val qualifiedSearchQuery = if (searchText.isNullOrBlank()) null else searchText
         // subscriptions for better control memory leak
         // subscriptions is in scope of BasePresenterImp
-        subscriptions += repository.getAllCharacters(searchText)
+        subscriptions += repository.getAllCharacters(qualifiedSearchQuery)
                 .applySchedulers()
                 .doOnSubscribe { view.refresh = true }
                 .doFinally { view.refresh = false }
