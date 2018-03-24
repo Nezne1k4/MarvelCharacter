@@ -2,6 +2,7 @@ package com.yahami.marvelcharacter.view.ext
 
 import android.app.Activity
 import android.content.Context
+import android.os.Parcelable
 import android.support.annotation.IdRes
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.RecyclerView
@@ -50,4 +51,9 @@ private class SwipeRefreshBinding(lazyViewProvider: Lazy<SwipeRefreshLayout>) : 
         view.isRefreshing = value
     }
 }
+
+/**
+ * Activity get extra
+ */
+fun <T : Parcelable> Activity.extra(key: String, default: T? = null): Lazy<T> = lazy { intent?.extras?.getParcelable<T>(key) ?: default ?: throw Error("No value $key in extras") }
 

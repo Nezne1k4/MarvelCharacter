@@ -10,7 +10,9 @@ import com.yahami.marvelcharacter.view.ext.bindView
 import com.yahami.marvelcharacter.view.ext.loadImage
 import com.yahami.marvelcharacter.view.list.ItemAdapter
 
-class CharacterItemAdapter(val character: MarvelCharacter)
+class CharacterItemAdapter(
+        private val character: MarvelCharacter,
+        private val operatorOnClick: (MarvelCharacter) -> Unit = {})
     : ItemAdapter<CharacterItemAdapter.ViewHolder>(R.layout.item_character) {
     override fun onCreateViewHolder(itemView: View): ViewHolder {
         return ViewHolder(itemView)
@@ -19,6 +21,8 @@ class CharacterItemAdapter(val character: MarvelCharacter)
     override fun ViewHolder.onBindViewHolder() {
         textView.text = character.name
         imageView.loadImage(character.imageUrl)
+        // clickListener
+        itemView.setOnClickListener { operatorOnClick(character) }
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

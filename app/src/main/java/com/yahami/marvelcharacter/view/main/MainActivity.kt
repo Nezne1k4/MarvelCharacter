@@ -2,10 +2,13 @@ package com.yahami.marvelcharacter.view.main
 
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
+import android.text.Editable
+import android.text.TextWatcher
 import com.yahami.marvelcharacter.R
 import com.yahami.marvelcharacter.data.remote.repository.MarvelRepository
 import com.yahami.marvelcharacter.model.MarvelCharacter
 import com.yahami.marvelcharacter.presenter.MainPresenter
+import com.yahami.marvelcharacter.view.character.CharacterProfileActivity
 import com.yahami.marvelcharacter.view.common.BaseActivityWithPresenter
 import com.yahami.marvelcharacter.view.ext.bindToSwipeRefresh
 import com.yahami.marvelcharacter.view.ext.toast
@@ -29,7 +32,20 @@ class MainActivity : BaseActivityWithPresenter(), MainView {
         //recyclerView.adapter = MainListAdapter(categoryItemAdapters)
 
         // swipeRefreshView
-        swipeRefreshView.setOnRefreshListener { presenter.onRefresh()}
+        swipeRefreshView.setOnRefreshListener { presenter.onRefresh() }
+
+        // searchView
+        searchView.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                presenter.onSearchChanged(s.toString())
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+        })
 
         // first load data
         presenter.onViewCreated()
@@ -45,13 +61,24 @@ class MainActivity : BaseActivityWithPresenter(), MainView {
     override var refresh by bindToSwipeRefresh(R.id.swipeRefreshView)
 
     override fun show(items: List<MarvelCharacter>) {
-        val categoryItemAdapters = items.map(::CharacterItemAdapter)
+        //val categoryItemAdapters = items.map(::CharacterItemAdapter)
+        val categoryItemAdapters = items.map(::createCategoryItemAdapter)
         recyclerView.adapter = MainListAdapter(categoryItemAdapters)
     }
 
     override fun showError(error: Throwable) {
         toast("Error: ${error.message}")
         error.printStackTrace()
+    }
+
+    private fun createCategoryItemAdapter(character: MarvelCharacter) =
+            CharacterItemAdapter(character, { showHeroProfile(character) })
+
+    /**
+     * Action on item adapter clicking
+     */
+    private fun showHeroProfile(character: MarvelCharacter) {
+        CharacterProfileActivity.start(this, character)
     }
 
     /**
